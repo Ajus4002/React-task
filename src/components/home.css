@@ -1,0 +1,14 @@
+
+
+   Table thead {
+    background: #aaaad4;
+  }
+   Table thead th {
+    border: 0;
+  }
+   Table tbody td {
+    vertical-align: middle;
+  }
+.button{
+  background: #aaaad4;
+}
