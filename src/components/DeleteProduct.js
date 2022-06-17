@@ -14,6 +14,11 @@ function DeleteProduct({items, onSave}) {
 useEffect(() => {
   if (!number) return
 
+  if (number < 0) {
+    alert("Invalid number")
+    return
+  }
+
 if(savedetails.length>number){
   savedetails.splice(number)
 }
@@ -21,7 +26,7 @@ else if(savedetails.length===number){
   return
 }
 else {
-  savedetails.push(...(Array.from({length: number}).map(()=>({productcode:null,quantity:null}))))
+  savedetails.push(...(Array.from({length: number - savedetails.length}).map(()=>({productcode:null,quantity:null}))))
 }
 
 setsavedetails([...savedetails])
@@ -64,6 +69,7 @@ function savebutton(){
         onChange={(e)=>setNumbers(e.target.value)}
       />
 
+      { number > 0 && <div>
       <Table striped bordered hover className='mt-md mt-3'>
       <thead>
         <tr>
@@ -98,6 +104,7 @@ function savebutton(){
       </tbody>
       </Table>
       <Button className='button' onClick={savebutton}>Save</Button>{' '}
+      </div>}
     </div>
   );
 }

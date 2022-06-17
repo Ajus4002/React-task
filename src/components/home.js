@@ -26,7 +26,7 @@ function NoAnimationExample() {
      
       className="mb-3"
     >
-      <Tab eventKey="home" title="Add product">
+     <Tab eventKey="home" title="Add product">
      
       <AddProduct items={items} onSave={v => setItems(v)}/>
      

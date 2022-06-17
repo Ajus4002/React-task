@@ -14,17 +14,24 @@ function AddProduct({items, onSave}) {
 useEffect(() => {
   if (!number) return
 
-if(savedetails.length>number){
-  savedetails.splice(number)
+  if (number < 0) {
+    alert("Invalid number")
+    return
+  }
+
+  const details = [...savedetails];
+
+if(details.length>number){
+  details.splice(number)
 }
-else if(savedetails.length===number){
+else if(details.length===number){
   return
 }
 else {
-  savedetails.push(...(Array.from({length: number}).map((v,i)=>({productcode:null,productname:null,quantity:null}))))
+  details.push(...(Array.from({length: (number - details.length)}).map((v,i)=>({productcode:null,productname:null,quantity:null}))))
 }
 
-setsavedetails([...savedetails])
+setsavedetails([...details])
 
 }, [number])
 
@@ -61,7 +68,8 @@ function savebutton(){
         onChange={(e)=>setNumber(e.target.value)}
       />
 </div>
-      <Table striped bordered hover className='mt-md mt-3' >
+{ number > 0 && <div>
+     <Table striped bordered hover className='mt-md mt-3' >
       <thead>
         <tr>
           <th>#</th>
@@ -101,8 +109,9 @@ function savebutton(){
         </tr>)}
 
       </tbody>
-      </Table>
+      </Table> 
       <Button className='button' onClick={savebutton}>Save</Button>{' '}
+  </div>}
     </div>
   );
 }
